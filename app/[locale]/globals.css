@@ -1,0 +1,39 @@
+body {
+  font-family: var(--font-montserrat), sans-serif; /* If using CSS variables */
+  /* Or directly if not: font-family: 'Montserrat', sans-serif; */
+  color: white; /* Default text color */
+  background-color: #181b21; /* A darkish default background, Tesla-like */
+}
+
+/* Basic link styling */
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animation-delay-300 {
+  animation-delay: 0.3s;
+}
+
+.animation-delay-600 {
+  animation-delay: 0.6s;
+}
