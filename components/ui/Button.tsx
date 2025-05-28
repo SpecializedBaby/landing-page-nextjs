@@ -2,15 +2,15 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 
 interface SimpleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'outline' | 'ghost'; // Основные варианты, которые вы использовали
-  size?: 'default' | 'sm' | 'lg' | 'icon';    // Размеры, которые вы использовали
-  // Убираем asChild и сложную систему вариантов cva
+  variant?: 'primary' | 'outline' | 'ghost';
+  size?: 'default' | 'sm' | 'lg' | 'icon';
 }
 
 const SimpleButton = React.forwardRef<HTMLButtonElement, SimpleButtonProps>(
   ({ className, variant = 'primary', size = 'default', children, ...props }, ref) => {
     const baseStyles =
-      "inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
+      // ИЗМЕНЕНО: rounded-md, font-medium, ring-green-500
+      "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
 
     let variantStyles = '';
     switch (variant) {
@@ -22,28 +22,24 @@ const SimpleButton = React.forwardRef<HTMLButtonElement, SimpleButtonProps>(
         break;
       case 'primary':
       default:
-        variantStyles = 'bg-blue-600 hover:bg-blue-700 text-white hover:scale-105';
+        variantStyles = 'bg-green-600 hover:bg-green-700 text-white hover:scale-105'; // Используем зеленый
         break;
     }
 
     let sizeStyles = '';
     switch (size) {
       case 'lg':
-        // Размеры из вашего HeroSection
-        sizeStyles = 'px-8 py-3 text-lg'; // py-4 было в одном, py-3 в SimpleButton
+        sizeStyles = 'px-8 py-3 text-lg'; // Этот размер используется для Hero кнопок на десктопе в вашем предыдущем варианте
         break;
       case 'sm':
-        // Размеры из вашего Header
-        sizeStyles = 'px-3 py-1 text-xs';
+        sizeStyles = 'px-4 py-1.5 text-xs'; // Пример маленького размера, если нужен (py-1.5 ~ 24px высота)
         break;
       case 'icon':
-        // Размеры из вашего Header для мобильного меню
-        sizeStyles = 'h-10 w-10 p-0'; // p-0 чтобы иконка была по центру без лишних паддингов
+        sizeStyles = 'h-10 w-10 p-0';
         break;
       case 'default':
       default:
-        // Размеры из вашего Header для "Get a Quote"
-        sizeStyles = 'px-6 py-2';
+        sizeStyles = 'px-6 py-2'; // Стандартный размер (высота ~30-32px с text-sm)
         break;
     }
 
