@@ -1,36 +1,66 @@
 'use client';
 
-import { useI18n } from '@/locales/client';
+import Image from "next/image";
+import { Button } from "@/components/Button";
+import { useI18n } from "@/locales/client";
+
+// Вынесем функцию скролла, чтобы ее можно было переиспользовать или передать
+// Но для простоты пока кнопки будут сами скроллить
+const handleScrollTo = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+    }
+};
 
 export default function HeroSection() {
   const t = useI18n();
-  const heroImageUrl = '/hero-image.png';
 
   return (
-    <section
-      className="relative h-screen flex items-center justify-center bg-cover bg-center"
-      style={{ backgroundImage: `url(${heroImageUrl})` }}
-    >
-      {/* Наложение для затемнения */}
-      <div className="absolute inset-0 bg-black/50" />
+    <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden text-white">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/hero-image.png"
+          alt={t('hero.mainHeadingPart1')} // alt-описание
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/50"></div> {/* Оверлей */}
+      </div>
 
-      {/* Контент Hero-секции */}
-      {/* pt-[calc(value)] нужен, чтобы контент не перекрывался фиксированной шапкой */}
-      {/* Предположим, высота шапки примерно 60-80px. Можно подобрать точнее. */}
-      <div className="relative z-10 text-center px-4 pt-[80px] sm:pt-[100px]"> {/* Добавлен padding-top */}
-        <h1 className="text-5xl md:text-6xl font-semibold mb-4 text-white">
-          {t('hero.mainHeading')}
-        </h1>
-        <p className="text-lg md:text-xl mb-8 text-white">
-          {t('hero.subheading')}
-        </p>
-        <div className="space-x-4">
-          <button className="bg-white text-black px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition">
-            {t('hero.ctaCustomOrder')}
-          </button>
-          <button className="border border-white text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-white hover:text-black transition">
-            {t('hero.ctaLearnMore')}
-          </button>
+      <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
+        {/* Добавлен отступ сверху, чтобы контент не был под шапкой. 
+            Можно сделать более точным, зная высоту шапки (H-20 из Header = 80px) */}
+        <div className="pt-20 lg:pt-24"> 
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            {t('hero.mainHeadingPart1')}
+            <br />
+            <span className="text-blue-400">{t('hero.mainHeadingPart2')}</span>
+          </h1>
+          <p className="text-lg md:text-xl lg:text-2xl mb-8 text-gray-200 max-w-2xl mx-auto">
+            {t('hero.subheading')}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              onClick={() => handleScrollTo("contact")}
+              size="lg"
+              variant="primary"
+              className="font-semibold"
+              // className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-full text-lg transition-all duration-200 hover:scale-105"
+            >
+              {t('hero.ctaStartProject')}
+            </Button>
+            <Button
+              onClick={() => handleScrollTo("portfolio")}
+              size="lg"
+              variant="outline"
+              className="font-semibold"
+              // className="border-2 border-white text-white hover:bg-white hover:text-black font-semibold px-8 py-4 rounded-full text-lg transition-all duration-200"
+            >
+              {t('hero.ctaViewWork')}
+            </Button>
+          </div>
         </div>
       </div>
     </section>

@@ -1,24 +1,54 @@
 export default {
-  ads: {
-    bannerText: '10 jaar garantie op alle daken · Snelle installatie · Gratis offerte binnen 24 uur', // Пример перевода
-  },
-  header: {
-    logoText: '87 BouwGroep',
-    nav: {
-      home: 'Home',
-      about: 'Over Ons',
-      flatRoof: 'Plat Dak',
-      portfolio: 'Portfolio',
-      services: 'Diensten',
-      contact: 'Contact',
-      ctaButton: 'Offerte Aanvragen',
-    },
-    languageSwitcher: 'Schakel over naar {locale}',
+  nav: {
+    logoPart1: "Roof",
+    logoPart2: "Tech", // Для <span className="text-blue-400">Tech</span>
+    services: "Services",
+    portfolio: "Portfolio",
+    about: "About",
+    contact: "Contact",
+    getAQuote: "Get a Quote",
+    languageSwitcherTitle: "Change language to {locale}" // Для title кнопки
   },
   hero: {
-    mainHeading: 'PLATTE DAKEN. GEBOUWD OM LANG MEE TE GAAN.', // Пример
-    subheading: 'Hoogwaardige waterdichte dakbedekking met precisie en zorg.', // Пример
-    ctaCustomOrder: 'Bestelling Op Maat',
-    ctaLearnMore: 'Meer Informatie',
+    mainHeadingPart1: "Premium Flat Roofs.",
+    mainHeadingPart2: "Built to Last.", // Для <span className="text-blue-400">Built to Last.</span>
+    subheading: "High-performance waterproof roofing solutions with precision engineering and unmatched durability.",
+    ctaStartProject: "Start Your Project",
+    ctaViewWork: "View Our Work"
+  },
+  servicesSection: {
+    title: "Our Services",
+    subheading: "Comprehensive flat roofing solutions for residential and commercial properties.",
+    item1_title: "Waterproof Installation",
+    item1_desc: "Premium waterproof membrane systems designed to protect your property for decades.",
+    item2_title: "Fast Installation",
+    item2_desc: "Efficient installation process that minimizes disruption to your daily operations.",
+    item3_title: "24/7 Support",
+    item3_desc: "Round-the-clock support and emergency services for your peace of mind."
+  },
+  portfolioSection: {
+    title: "Our Portfolio",
+    subheading: "Showcasing our expertise in flat roof installations across various property types.",
+    projectTitle: "Project {number}", // Для Project 1, Project 2 и т.д.
+    projectType: "Commercial Flat Roof" // Общий тип для примера
+  },
+  aboutSection: {
+    title: "Why Choose RoofTech?",
+    description: "With over 15 years of experience in flat roof installation, we combine cutting-edge technology with time-tested techniques to deliver roofing solutions that exceed expectations.",
+    point1: "10-year warranty on all installations",
+    point2: "Licensed and insured professionals",
+    point3: "Premium waterproof materials",
+    point4: "Free quotes within 24 hours"
+  },
+  contactSection: {
+    title: "Get Your Free Quote",
+    subheading: "Ready to protect your property with a premium flat roof? Contact us today.",
+    form: {
+      namePlaceholder: "Your Name",
+      phonePlaceholder: "Phone Number",
+      emailPlaceholder: "Email Address",
+      messagePlaceholder: "Tell us about your roofing project...",
+      sendButton: "Send Message"
+    }
   }
 } as const;
