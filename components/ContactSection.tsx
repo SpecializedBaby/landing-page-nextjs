@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from "@/components/Button";
+import { Button } from "@/components/ui/Button";
 import { useI18n } from "@/locales/client";
 
 export default function ContactSection() {

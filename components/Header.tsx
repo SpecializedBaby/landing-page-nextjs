@@ -1,36 +1,59 @@
 'use client';
 
-import { Button } from "@/components/Button";
+import { Button } from "@/components/ui/Button";
 import { Menu, X, Zap } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useI18n, useChangeLocale, useCurrentLocale } from "@/locales/client";
+import { cn } from "@/lib/utils";
 
 export default function Header() {
   const t = useI18n();
   const changeLocale = useChangeLocale();
   const currentLocale = useCurrentLocale();
 
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showHeader, setShowHeader] = useState(true); // Управляет видимостью шапки
+  const [lastScrollY, setLastScrollY] = useState(0);    // Последняя позиция скролла
+  const [changeHeaderBackground, setChangeHeaderBackground] = useState(false); // Для смены фона
+
+  const ADS_BANNER_HEIGHT_PX = 40; // Высота ADS баннера в пикселях (соответствует h-10)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+
+      // Логика для смены фона шапки (когда немного проскроллили)
+      setChangeHeaderBackground(currentScrollY > 10);
+
+      // Логика для показа/скрытия шапки
+      if (typeof window !== 'undefined') { // Убедимся, что window определен
+        if (currentScrollY > lastScrollY && currentScrollY > (ADS_BANNER_HEIGHT_PX + 50)) {
+          // Скролл вниз и прошли порог (высота ADS + 50px)
+          if (showHeader) setShowHeader(false);
+        } else if (currentScrollY < lastScrollY || currentScrollY <= (ADS_BANNER_HEIGHT_PX + 10)) {
+          // Скролл вверх ИЛИ находимся очень близко к верху (сразу под ADS баннером + 10px)
+          if (!showHeader) setShowHeader(true);
+        }
+      }
+      setLastScrollY(currentScrollY <= 0 ? 0 : currentScrollY); // Обновляем lastScrollY
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY, showHeader]); // Добавляем showHeader в зависимости
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      // Добавляем смещение, равное общей высоте фиксированных элементов
-      const adsBannerHeight = 40; // 2.5rem или h-10
-      const headerHeight = window.innerWidth < 1024 ? 64 : 80; // h-16 или h-20
-      const offset = adsBannerHeight + headerHeight;
+      const headerHeight = window.innerWidth < 1024 ? 64 : 80; // h-16 или lg:h-20
+      // Общий отступ от верха окна браузера до начала контента секции
+      // Учитываем, что Header может быть скрыт, но ADS баннер всегда на месте
+      const totalOffset = showHeader ? ADS_BANNER_HEIGHT_PX + headerHeight : ADS_BANNER_HEIGHT_PX;
       
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - offset;
+      const offsetPosition = elementPosition - totalOffset;
 
       window.scrollTo({
         top: offsetPosition,
@@ -55,9 +78,12 @@ export default function Header() {
 
   return (
     <nav
-      className={`fixed top-10 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
-        isScrolled ? "bg-black/60 backdrop-blur-md border-b border-white/10" : "bg-transparent"
-      }`}
+      className={cn(
+        "fixed left-0 right-0 w-full z-50 top-10", // Базовая позиция ПОД ADS баннером (h-10 = 40px)
+        "transition-all duration-300 ease-in-out", // Плавность для фона и transform
+        changeHeaderBackground ? "bg-black/80 backdrop-blur-md border-b border-white/10" : "bg-transparent",
+        showHeader ? "translate-y-0" : "-translate-y-full" // Анимация сдвига вверх/вниз
+      )}
     >
       <div className="container mx-auto px-4 lg:px-6">
         <div className="flex items-center justify-between h-16 lg:h-20">
@@ -82,12 +108,11 @@ export default function Header() {
             ))}
           </div>
 
-          <div className="hidden lg:flex items-center space-x-2">
+          <div className="hidden lg:flex items-center space-x-3">
             <Button
               onClick={() => scrollToSection("contact")}
-              size="default"
               variant="primary"
-              // className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-full transition-all duration-200 hover:scale-105"
+              size="default"
             >
               {t('nav.getAQuote')}
             </Button>
@@ -95,29 +120,29 @@ export default function Header() {
                 variant="outline"
                 size="sm"
                 onClick={toggleLanguage}
-                // className="text-white border-white/50 hover:bg-white/10 hover:text-white px-3 py-1 rounded-full"
                 title={t('nav.languageSwitcherTitle', { locale: targetLocaleDisplay})}
             >
                 {targetLocaleDisplay}
             </Button>
           </div>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden" // text-white hover:bg-white/10"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </Button>
+          <div className="lg:hidden flex items-center">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-white hover:bg-white/10"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </Button>
+          </div>
         </div>
-
         <div
           className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+            isMobileMenuOpen ? "max-h-[500px] py-4 border-t border-white/10" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="py-4 space-y-2 border-t border-white/10">
+          <div className="space-y-2 px-2">
             {navItems.map((item) => (
               <button
                 key={item.label}
@@ -129,14 +154,15 @@ export default function Header() {
             ))}
             <Button
               onClick={() => scrollToSection("contact")}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-full mt-3"
+              variant="primary"
+              className="w-full mt-3 py-3"
             >
               {t('nav.getAQuote')}
             </Button>
             <Button
                 variant="outline"
                 onClick={toggleLanguage}
-                className="w-full text-white border-white/50 hover:bg-white/10 hover:text-white py-3 rounded-full mt-3"
+                className="w-full mt-3 py-3"
                 title={t('nav.languageSwitcherTitle', { locale: targetLocaleDisplay})}
             >
                 {targetLocaleDisplay}
