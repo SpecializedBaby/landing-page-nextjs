@@ -1,16 +1,24 @@
 export default {
+  ads: {
+    bannerText: '10 jaar garantie op alle daken · Snelle installatie · Gratis offerte binnen 24 uur', // Пример перевода
+  },
   header: {
-    ads: 'Speciale Aanbieding! Ontvang een Gratis Dakinspectie!',
+    logoText: '87 BouwGroep',
     nav: {
-      services: 'Diensten',
+      home: 'Home',
       about: 'Over Ons',
+      flatRoof: 'Plat Dak',
+      portfolio: 'Portfolio',
+      services: 'Diensten',
       contact: 'Contact',
+      ctaButton: 'Offerte Aanvragen',
     },
+    languageSwitcher: 'Schakel over naar {locale}',
   },
   hero: {
-    heading: 'Expert Platte Daken Oplossingen',
-    subheading: 'Duurzame, Betrouwbare en Professionele Dakdiensten in Nederland.',
-    ctaOrder: 'Bestelling Op Maat',
+    mainHeading: 'PLATTE DAKEN. GEBOUWD OM LANG MEE TE GAAN.', // Пример
+    subheading: 'Hoogwaardige waterdichte dakbedekking met precisie en zorg.', // Пример
+    ctaCustomOrder: 'Bestelling Op Maat',
     ctaLearnMore: 'Meer Informatie',
-  },
+  }
 } as const;
