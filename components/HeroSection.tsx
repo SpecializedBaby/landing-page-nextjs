@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import { Button } from "@/components/Button";
+import { Button } from "@/components/ui/Button";
 import { useI18n } from "@/locales/client";
 
 // Вынесем функцию скролла, чтобы ее можно было переиспользовать или передать
@@ -46,7 +46,7 @@ export default function HeroSection() {
       <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
         {/* Добавлен отступ сверху, чтобы контент не был под шапкой. 
             Можно сделать более точным, зная высоту шапки (H-20 из Header = 80px) */}
-        <div className="pt-[110px] lg:pt-[128px]"> 
+        <div className="pt-[104px] lg:pt-[120px]"> 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
             {t('hero.mainHeadingPart1')}
             <br />
