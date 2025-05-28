@@ -1,16 +1,24 @@
 export default {
+  ads: {
+    bannerText: '10-Year Warranty on All Roofs · Fast Installation · Free Quote Within 24h',
+  },
   header: {
-    ads: 'Special Offer! Get a Free Roof Inspection!',
+    logoText: '87 BouwGroep',
     nav: {
+      home: 'Home',
+      about: 'About',
+      flatRoof: 'Flat Roofs',
+      portfolio: 'Portfolio',
       services: 'Services',
-      about: 'About Us',
       contact: 'Contact',
+      ctaButton: 'Get a Quote',
     },
+    languageSwitcher: 'Switch to {locale}', // {{locale}} will be NL or EN
   },
   hero: {
-    heading: 'Expert Flat Roof Solutions',
-    subheading: 'Durable, Reliable, and Professional Roofing Services in the Netherlands.',
-    ctaOrder: 'Custom Order',
+    mainHeading: 'FLAT ROOFS. BUILT TO LAST.',
+    subheading: 'High-performance waterproof roofing with precision and care.',
+    ctaCustomOrder: 'Custom Order',
     ctaLearnMore: 'Learn More',
-  },
+  }
 } as const;

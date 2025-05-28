@@ -1,38 +1,44 @@
-'use client'; // Crucial for client-side hooks
+'use client';
 
-import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-// Import hooks from your client i18n setup
 import { useI18n, useChangeLocale, useCurrentLocale } from '@/locales/client';
 
-const Header = () => {
+export default function Header() {
   const t = useI18n();
   const changeLocale = useChangeLocale();
   const currentLocale = useCurrentLocale();
-  // ... rest of your Header component logic from before ...
 
-  // Example usage (ensure your translation keys match)
+  const toggleLanguage = () => {
+    const targetLocale = currentLocale === 'en' ? 'nl' : 'en';
+    changeLocale(targetLocale);
+  };
+
+  const targetLocaleDisplay = currentLocale === 'en' ? 'NL' : 'EN';
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out bg-transparent`} // Simplified for example
-    >
-      <div className="bg-gray-800 bg-opacity-80 text-center py-2 text-sm">
-        <p>{t('header.ads')}</p>
-      </div>
-      <nav className="container mx-auto px-6 py-4 flex justify-between items-center text-white">
-        <Link href="/" className="text-2xl font-bold">
-          FlatRoof NL
-        </Link>
-        <div className="space-x-6 flex items-center">
-          <Link href="#services">{t('header.nav.services')}</Link>
-          {/* Language Switcher */}
-          <button onClick={() => changeLocale(currentLocale === 'en' ? 'nl' : 'en')}>
-            Switch to {currentLocale === 'en' ? 'NL' : 'EN'}
+    // Шапка фиксирована поверх всего. ADS баннер выше не фиксирован, поэтому он прокрутится.
+    <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-black/30 border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
+        <div className="text-lg font-semibold text-white">{t('header.logoText')}</div>
+        <nav className="flex items-center space-x-2 sm:space-x-4 md:space-x-6 text-sm text-white">
+          <Link href="#" className="hover:underline hidden md:inline">{t('header.nav.home')}</Link>
+          <Link href="#" className="hover:underline hidden md:inline">{t('header.nav.about')}</Link>
+          {/* <Link href="#" className="hover:underline hidden md:inline">{t('header.nav.roofTypes')}</Link> */}
+          {/* <Link href="#" className="hover:underline hidden md:inline">{t('header.nav.portfolio')}</Link> */}
+          <Link href="#" className="hover:underline hidden sm:inline">{t('header.nav.services')}</Link>
+          <Link href="#" className="hover:underline">{t('header.nav.contact')}</Link>
+          <button className="ml-2 md:ml-4 border border-white rounded-full px-3 sm:px-4 py-1 text-xs sm:text-sm hover:bg-white hover:text-black transition">
+            {t('header.nav.ctaButton')}
           </button>
-        </div>
-      </nav>
+          <button
+            onClick={toggleLanguage}
+            className="ml-2 border border-white rounded-full px-3 sm:px-4 py-1 text-xs sm:text-sm hover:bg-white hover:text-black transition"
+            title={t('header.languageSwitcher', { locale: targetLocaleDisplay })}
+          >
+            {targetLocaleDisplay}
+          </button>
+        </nav>
+      </div>
     </header>
   );
-};
-
-export default Header;
+}
