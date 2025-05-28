@@ -1,10 +1,8 @@
 export default {
   ads: {
-    bannerText: "10-Year Warranty on All Roofs · Fast Installation · Free Quote Within 24h"
+    bannerText: "10-Year Warranty on All Roofs"
   },
   nav: {
-    logoPart1: "Roof",
-    logoPart2: "Tech", // Для <span className="text-blue-400">Tech</span>
     services: "Services",
     portfolio: "Portfolio",
     about: "About",
@@ -13,9 +11,9 @@ export default {
     languageSwitcherTitle: "Change language to {locale}" // Для title кнопки
   },
   hero: {
-    mainHeadingPart1: "Premium Flat Roofs.",
-    mainHeadingPart2: "Built to Last.", // Для <span className="text-blue-400">Built to Last.</span>
-    subheading: "High-performance waterproof roofing solutions with precision engineering and unmatched durability.",
+    mainHeadingPart1: "Flat Roofs",
+    // mainHeadingPart2: "Built to Last.", // Для <span className="text-green-400">Built to Last.</span>
+    subheading: "High-performance waterproof roofing solutions",
     ctaStartProject: "Start Your Project",
     ctaViewWork: "View Our Work"
   },

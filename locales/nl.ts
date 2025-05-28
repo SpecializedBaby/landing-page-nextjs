@@ -1,10 +1,8 @@
 export default {
   ads: {
-    bannerText: "10 jaar garantie op alle daken · Snelle installatie · Binnen 24u een gratis offerte"
+    bannerText: "10 jaar garantie op alle daken"
   },
   nav: {
-    logoPart1: "Roof",
-    logoPart2: "Tech", // Для <span className="text-blue-400">Tech</span>
     services: "Services",
     portfolio: "Portfolio",
     about: "About",
@@ -13,9 +11,9 @@ export default {
     languageSwitcherTitle: "Change language to {locale}" // Для title кнопки
   },
   hero: {
-    mainHeadingPart1: "Premium Flat Roofs.",
-    mainHeadingPart2: "Built to Last.", // Для <span className="text-blue-400">Built to Last.</span>
-    subheading: "High-performance waterproof roofing solutions with precision engineering and unmatched durability.",
+    mainHeadingPart1: "Flat Roofs",
+    // mainHeadingPart2: "Built to Last.", // Для <span className="text-blue-400">Built to Last.</span>
+    subheading: "High-performance waterproof roofing solutions.",
     ctaStartProject: "Start Your Project",
     ctaViewWork: "View Our Work"
   },
@@ -33,7 +31,7 @@ export default {
     title: "Our Portfolio",
     subheading: "Showcasing our expertise in flat roof installations across various property types.",
     projectTitle: "Project {number}", // Для Project 1, Project 2 и т.д.
-    projectType: "Commercial Flat Roof" // Общий тип для примера
+    projectType: "Commercial Flat Roof" // General type for Ex.
   },
   aboutSection: {
     title: "Why Choose RoofTech?",
