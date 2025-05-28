@@ -24,7 +24,18 @@ export default function Header() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      // Добавляем смещение, равное общей высоте фиксированных элементов
+      const adsBannerHeight = 40; // 2.5rem или h-10
+      const headerHeight = window.innerWidth < 1024 ? 64 : 80; // h-16 или h-20
+      const offset = adsBannerHeight + headerHeight;
+      
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
     }
     setIsMobileMenuOpen(false);
   };
@@ -44,7 +55,7 @@ export default function Header() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
+      className={`fixed top-10 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
         isScrolled ? "bg-black/60 backdrop-blur-md border-b border-white/10" : "bg-transparent"
       }`}
     >

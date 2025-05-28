@@ -9,7 +9,21 @@ import { useI18n } from "@/locales/client";
 const handleScrollTo = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        // Для кнопок в Hero, которые не являются частью основной навигации,
+        // можно использовать более простой скролл или также учитывать offset,
+        // если они тоже должны точно позиционировать начало секции под шапкой.
+        // Пока оставим простой скролл, т.к. scrollToSection в Header уже учитывает offset.
+        const adsBannerHeight = 40; 
+        const headerHeight = window.innerWidth < 1024 ? 64 : 80; 
+        const offset = adsBannerHeight + headerHeight;
+        
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
     }
 };
 
@@ -20,7 +34,7 @@ export default function HeroSection() {
     <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden text-white">
       <div className="absolute inset-0 z-0">
         <Image
-          src="/hero-image.png"
+          src="/images/hero-image.png"
           alt={t('hero.mainHeadingPart1')} // alt-описание
           fill
           className="object-cover"
@@ -32,7 +46,7 @@ export default function HeroSection() {
       <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
         {/* Добавлен отступ сверху, чтобы контент не был под шапкой. 
             Можно сделать более точным, зная высоту шапки (H-20 из Header = 80px) */}
-        <div className="pt-20 lg:pt-24"> 
+        <div className="pt-[110px] lg:pt-[128px]"> 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
             {t('hero.mainHeadingPart1')}
             <br />
