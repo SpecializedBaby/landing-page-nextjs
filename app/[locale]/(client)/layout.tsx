@@ -1,3 +1,6 @@
+// Layout for client-side heavy pages within the (client) group.
+// Provides the I18nProviderClient for internationalization in client components.
+
 import { ReactElement } from 'react';
 import { I18nProviderClient } from '@/locales/client'; // Adjust path if locales is not at root
 
