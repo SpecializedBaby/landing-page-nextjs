@@ -68,6 +68,53 @@ This will typically start the application on `http://localhost:3000`. Open this 
 This provides a solid foundation for your README. You can expand it later with sections on:
 
 * Project Structure
+landing-page-nextjs/
+```bash
+├── app/
+│   └── [locale]/                     # Динамический сегмент для локалей (например, /en, /nl)
+│       ├── (client)/                 # Группа роутов для страниц с клиентским рендерингом
+│       │   ├── layout.tsx            # Лейаут для группы (client) (здесь I18nProviderClient)
+│       │   └── page.tsx              # Основная страница лендинга (собирает секции)
+│       ├── layout.tsx                # Корневой лейаут для [locale] (html, body, шрифт, async params)
+│       └── globals.css               # Ваши глобальные стили
+
+├── components/
+│   ├── ui/                           # Папка для мелких UI-компонентов (примитивов)
+│   │   └── Button.tsx                # Ваш упрощенный компонент Button
+│   │
+│   ├── sections/                     # Предлагаемая папка для крупных секций страницы
+│   │   ├── Header.tsx
+│   │   ├── HeroSection.tsx
+│   │   ├── ServicesSection.tsx
+│   │   ├── PortfolioSection.tsx
+│   │   ├── AboutSection.tsx
+│   │   └── ContactSection.tsx
+│   │
+│   └── (другие общие компоненты...)
+│
+├── locales/                          # Все, что связано с next-international
+│   ├── client.ts                     # Настройка для клиентских компонентов (I18nProviderClient, хуки)
+│   ├── server.ts                     # (Опционально) Настройка для серверных компонентов (getI18n)
+│   ├── en.ts                         # Файл с английскими переводами
+│   └── nl.ts                         # Файл с голландскими переводами
+│
+├── lib/                              # Вспомогательные функции
+│   └── utils.ts                      # Функция cn для объединения классов Tailwind
+│
+├── public/                           # Статические ассеты
+│   ├── images/                       # Папка для изображений
+│   │   └── your-hero-image.jpg       # Пример вашего hero-изображения
+│   └── favicon.ico                   # Иконка сайта
+│
+├── middleware.ts                     # Middleware для next-international (определение локали, редиректы)
+├── tailwind.config.ts                # Конфигурация Tailwind CSS
+├── postcss.config.js                 # Конфигурация PostCSS (нужна для Tailwind)
+├── tsconfig.json                     # Конфигурация TypeScript
+├── next.config.mjs                   # Конфигурация Next.js
+├── package.json                      # Список зависимостей и скрипты проекта
+└── README.md                         # Описание проекта
+```
+
 * Available Scripts (build, lint, etc.)
 * Technologies Used
 * Deployment
