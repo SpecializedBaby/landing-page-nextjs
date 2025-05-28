@@ -1,4 +1,7 @@
 export default {
+  ads: {
+    bannerText: "10-Year Warranty on All Roofs · Fast Installation · Free Quote Within 24h"
+  },
   nav: {
     logoPart1: "Roof",
     logoPart2: "Tech", // Для <span className="text-blue-400">Tech</span>

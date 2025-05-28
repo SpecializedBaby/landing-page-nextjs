@@ -1,4 +1,7 @@
 export default {
+  ads: {
+    bannerText: "10 jaar garantie op alle daken · Snelle installatie · Binnen 24u een gratis offerte"
+  },
   nav: {
     logoPart1: "Roof",
     logoPart2: "Tech", // Для <span className="text-blue-400">Tech</span>
