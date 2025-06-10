@@ -7,11 +7,37 @@ export default function ContactSection() {
   const t = useI18n();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-    alert(`Form submitted (for demo):\n${JSON.stringify(data, null, 2)}`);
-  };
+  event.preventDefault();
+
+  const formData = new FormData(event.currentTarget);
+  const data = Object.fromEntries(formData.entries());
+  
+  // Get values
+  const name = data.name || '';
+  const phone = data.phone || '';
+  const email = data.email || '';
+  const message = data.message || '';
+
+  const whatsappNumber = "31616498559";
+
+  // The Request form
+  const messageText = `
+New message from 87BouwGroep:
+-----------------------------
+Name: ${name}
+Phone: ${phone}
+Email: ${email}
+-----------------------------
+Message:
+${message}
+  `.trim();
+
+  // Encode
+  const encodedMessage = encodeURIComponent(messageText);
+  const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
+  
+  window.open(whatsappUrl, '_blank');
+};
 
   return (
     <section id="contact" className="py-20 lg:py-28 bg-gray-100 text-gray-800">
