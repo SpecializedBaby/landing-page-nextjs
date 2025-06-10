@@ -21,7 +21,7 @@ export default function PortfolioSection() {
           {portfolioItems.map((item) => (
             <div key={item} className="relative overflow-hidden rounded-2xl group aspect-[3/2] shadow-lg hover:shadow-xl transition-shadow duration-300">
               <Image
-                src={`/placeholder.svg`} // /image.jpg+${item}   600 400
+                src={`/images/Project-${item}.jpg`} // 600 400
                 alt={t('portfolioSection.projectTitle', { number: item })}
                 fill
                 className="object-cover transform group-hover:scale-105 transition-transform duration-300"
