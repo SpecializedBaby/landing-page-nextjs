@@ -31,7 +31,7 @@ export default {
     title: "Our Portfolio",
     subheading: "Showcasing our expertise in flat roof installations across various property types.",
     projectTitle: "Project {number}", // Для Project 1, Project 2 и т.д.
-    projectType: "Commercial Flat Roof" // Общий тип для примера
+    projectType: "Commercial Flat Roof"
   },
   aboutSection: {
     title: "Why Choose RoofTech?",
